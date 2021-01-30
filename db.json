@@ -1,0 +1,54 @@
+{
+  "contacts": [
+    {
+      "name": "Kentucky",
+      "number": "123",
+      "experience": "middle",
+      "licence": true,
+      "skills": [
+        "SCSS"
+      ],
+      "id": 1
+    },
+    {
+      "name": "Anna",
+      "number": "000005",
+      "experience": "middle",
+      "licence": true,
+      "skills": [
+        "JS"
+      ],
+      "id": 6
+    },
+    {
+      "name": "Nick",
+      "number": "34343434",
+      "experience": "middle",
+      "licence": true,
+      "skills": [
+        "Git"
+      ],
+      "id": 7
+    },
+    {
+      "name": "Vicktoria",
+      "number": "12120000",
+      "experience": "middle",
+      "licence": true,
+      "skills": [
+        "Git"
+      ],
+      "id": 8
+    },
+    {
+      "name": "Yegor",
+      "number": "121200094",
+      "experience": "middle",
+      "licence": true,
+      "skills": [
+        "SCSS"
+      ],
+      "id": 9
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+.point {
+  margin-right: 7px;
+}
+
+.positionBtn {
+  /* color: rgb(88, 88, 88); */
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.colorBtn {
+  color: rgb(88, 88, 88);
+}
+
+.colorBtn:not(:last-child) {
+  margin-right: 4px;
+}
+
+.colorBtn:hover,
+.colorBtn:focus {
+  color: rgb(160, 36, 36);
+}
