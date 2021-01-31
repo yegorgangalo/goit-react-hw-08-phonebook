@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { authOperations } from 'redux/auth';
+import IconButton from 'components/IconButton';
 import s from './LoginPage.module.css';
 
 export default function LoginPage() {
@@ -28,11 +29,11 @@ export default function LoginPage() {
 
   return (
     <div>
-      <h1>Страница логина</h1>
+      <h1 className={s.title}>Log In</h1>
 
       <form onSubmit={handleSubmit} className={s.form} autoComplete="on">
         <label className={s.label}>
-          Почта
+          Email
           <input
             type="email"
             name="email"
@@ -42,7 +43,7 @@ export default function LoginPage() {
         </label>
 
         <label className={s.label}>
-          Пароль
+          Password
           <input
             type="password"
             name="password"
@@ -50,8 +51,8 @@ export default function LoginPage() {
             onChange={handleChange}
           />
         </label>
-
-        <button type="submit">Войти</button>
+        <IconButton type="submit" classNames={s.logInBtn}> Log In </IconButton>
+        {/* <button type="submit">Войти</button> */}
       </form>
     </div>
   );

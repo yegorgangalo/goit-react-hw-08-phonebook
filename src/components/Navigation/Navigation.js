@@ -10,7 +10,7 @@ export default function Navigation() {
     <header className={s.header}>
       <nav>
         {isLoggedIn ?
-            <NavLink to="/contacts" className={s.link} activeClassName={s.activeLink}>Contacts</NavLink> :
+            <NavLink to="/contacts" className={s.link} activeClassName={s.activeLink}>Phonebook</NavLink> :
           <>
             <NavLink to="/login" className={s.link} activeClassName={s.activeLink}>Log In</NavLink>
             <NavLink to="/register" className={s.link} activeClassName={s.activeLink}>Register</NavLink>

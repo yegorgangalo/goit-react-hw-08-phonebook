@@ -12,6 +12,7 @@
 
 .colorBtn {
   color: rgb(88, 88, 88);
+  fill: rgb(88, 88, 88);
 }
 
 .colorBtn:not(:last-child) {
@@ -21,4 +22,11 @@
 .colorBtn:hover,
 .colorBtn:focus {
   color: rgb(160, 36, 36);
+  fill: rgb(160, 36, 36);
+}
+
+.spinner {
+  position: relative;
+  width: 14px;
+  fill: inherit;
 }

@@ -37,8 +37,11 @@ function ContactsBookPage () {
 
       return (
         <>
-          <h1 className={s.title}>Phonebook</h1>
+          {/* <h1 className={s.title}>Phonebook</h1> */}
+          <div className={s.row}>
+          <h1 className={s.title}>My Contacts</h1>
           <IconButton onClick={openFreshModal} aria-label="Open Modal" classNames={s.iconButtonOpenModal}> Add Contact </IconButton>
+          </div>
           {showModal && (
             <Modal onClose={toggleModal}>
               <ContactFormik toggleModal={toggleModal}/>
@@ -47,7 +50,7 @@ function ContactsBookPage () {
               </IconButton>
             </Modal>
           )}
-          <h2 className={s.title}>Contacts</h2>
+
           {contacts.length>1 && (<Filter/>)}
           <Context.Provider value={{toggleModal}}>
             <ContactList/>

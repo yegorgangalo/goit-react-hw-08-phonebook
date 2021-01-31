@@ -9,7 +9,7 @@ function Filter() {
     const onChangeFilter = ({ target }) => dispatch(changeFilter(target.value));
 
         return <div className={s.labelBlock} >
-            <h4  className={s.title}>Find contacts by name, number or level</h4>
+            <h4  className={s.title}>Find contacts by name or number</h4>
             <input className={s.input} type="text" name="filter" value={filter} onChange={onChangeFilter} />
             </div>
 }

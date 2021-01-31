@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { authOperations } from 'redux/auth';
+import IconButton from 'components/IconButton';
 import s from './RegisterPage.module.css';
 
 export default function RegisterPage() {
@@ -29,16 +30,16 @@ export default function RegisterPage() {
 
   return (
     <div>
-      <h1>Страница регистрации</h1>
+      <h1 className={s.title}>Registration</h1>
 
       <form onSubmit={handleSubmit} className={s.form} autoComplete="on">
         <label className={s.label}>
-          Имя
+          Name
           <input type="text" name="name" value={name} onChange={handleChange} />
         </label>
 
         <label className={s.label}>
-          Почта
+          Email
           <input
             type="email"
             name="email"
@@ -48,7 +49,7 @@ export default function RegisterPage() {
         </label>
 
         <label className={s.label}>
-          Пароль
+          Password
           <input
             type="password"
             name="password"
@@ -56,8 +57,8 @@ export default function RegisterPage() {
             onChange={handleChange}
           />
         </label>
-
-        <button type="submit">Зарегистрироваться</button>
+        <IconButton type="submit" classNames={s.registerBtn}> Register </IconButton>
+        {/* <button type="submit">Register</button> */}
       </form>
     </div>
   );
