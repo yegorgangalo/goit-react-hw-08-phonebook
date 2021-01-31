@@ -24,42 +24,42 @@ const register = createAsyncThunk(
     }
 });
 
-const logIn = createAsyncThunk('auth/login', async credentials => {
+const logIn = createAsyncThunk('auth/login', async (credentials, {rejectWithValue}) => {
   try {
     const { data } = await axios.post('/users/login', credentials);
     token.set(data.token);
     return data;
   } catch (error) {
-    console.log(error);
+    return rejectWithValue(error.response);
   }
 });
 
-const logOut = createAsyncThunk('auth/logout', async () => {
+const logOut = createAsyncThunk('auth/logout', async ({rejectWithValue}) => {
   try {
     await axios.post('/users/logout');
     token.unset();
   } catch (error) {
-    console.log(error);
+    return rejectWithValue(error.response);
   }
 });
 
 const fetchCurrentUser = createAsyncThunk(
   'auth/refresh',
-  async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
+  async (_, {rejectWithValue, getState}) => {
+    const state = getState();
     const persistedToken = state.auth.token;
 
     if (persistedToken === null) {
-      return thunkAPI.rejectWithValue(false);
+      return rejectWithValue(false);
     }
 
     token.set(persistedToken);
     try {
-      const { data } = await axios.get('/users/current');
+      const {data} = await axios.get('/users/current');
       return data;
     } catch (error) {
-      console.log(error);
-      thunkAPI.rejectWithValue(error);
+      error.response.status===401 && console.log('Unvalid Token. ',error);
+      return rejectWithValue(error.response.status === 401 ? false : error.response);
     }
   },
 );

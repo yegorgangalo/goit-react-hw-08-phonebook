@@ -17,6 +17,7 @@ export default function App() {
     const dispatch = useDispatch();
     const notRefreshed = useSelector(authSelectors.getNotRefreshed);
     const authError = useSelector(authSelectors.getError);
+    console.log('autherror', authError);
 
   useEffect(() => {
     dispatch(authOperations.fetchCurrentUser());
