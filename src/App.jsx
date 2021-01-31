@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { lazy, Suspense } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Navigation from './components/Navigation';
+import PrivateRoute from 'components/PrivateRoute';
+import PublicRoute from 'components/PublicRoute';
 import { authOperations } from './redux/auth';
 const LoginPage = lazy(() => import('views/LoginPage' /* webpackChunkName: "loginpage" */));
 const RegisterPage = lazy(() => import('views/RegisterPage' /* webpackChunkName: "registerpage" */));
@@ -21,25 +23,21 @@ const dispatch = useDispatch();
         <Navigation />
         <Suspense fallback={<span>Is Loading...</span>}>
             <Switch>
-                <Route path="/login" exact>
+                <PublicRoute path="/login" redirectTo="/contacts" restricted exact>
                     <LoginPage/>
-                </Route>
+                </PublicRoute>
 
-                <Route path="/register" exact>
+                <PublicRoute path="/register" redirectTo="/contacts" restricted exact>
                     <RegisterPage/>
-                </Route>
+                </PublicRoute>
 
-                {/* <Route path="/movies/:slug">
-                  <MovieDetailsView />
-                </Route> */}
-
-                <Route path="/contacts" exact>
+                <PrivateRoute path="/contacts" redirectTo="/login" exact>
                     <ContactsBookPage/>
-                </Route>
+                </PrivateRoute>
 
-                <Route>
+                <PublicRoute redirectTo="/contacts" restricted exact>
                     <LoginPage/>
-                </Route>
+                </PublicRoute>
             </Switch>
         </Suspense>
         <ToastContainer autoClose={3000}/>

@@ -11,7 +11,6 @@ import { getEditItem } from 'redux/contacts/contacts-selectors';
 /* ------------------------------------------------------------------------------------------------------------ */
 function ContactFormik({ toggleModal }) {
   const contactEditInfo = useSelector(getEditItem);
-  // const defaultFormikStateValues = contactEditInfo ? { ...contactEditInfo, licence: true } : defaultStateValues;
   const defaultFormikStateValues = contactEditInfo ? contactEditInfo : defaultStateValues;
 
   const dispatch = useDispatch();
@@ -44,29 +43,6 @@ function ContactFormik({ toggleModal }) {
            <label  className={s.title} htmlFor="number">Number </label>
            <Field className={s.labelBlock} type="text" name="number" />
            <ErrorMessage name="number" component="div" />
-           {/* <div  role="group" aria-labelledby="radio-group" className={`${s.labelBlock} ${s.groupBlock}`}>
-                <h3 className={s.title}>Your Level</h3>
-                {expLevel.map(exp =>
-                    <label key={exp}>
-                        <Field type="radio"  className={s.inputBox} name="experience" value={exp} />
-                        {exp}
-                    </label>
-                )}
-            </div>
-            <div role="group" aria-labelledby="checkbox-group" className={`${s.labelBlock} ${s.groupBlock}`}>
-              <h3 className={s.title}>Your Skills</h3>
-              {skills.map(skill =>
-                <label key={skill}>
-                    <Field type="checkbox"  className={s.inputBox} name="skills" value={skill} />
-                    {skill}
-                </label>
-              )}
-            </div>
-            <label className={s.labelBlock}>
-                <Field type="checkbox"  className={s.inputBox} name="licence" id="licence" />
-                All data is right
-            </label> */}
-
             <IconButton
                 type="submit"
                 classNames={s.iconButtonAddContact}
@@ -79,14 +55,9 @@ function ContactFormik({ toggleModal }) {
 }
 
 /* ------------------------------------------------------------------------------------------------------------ */
-// const expLevel = ['junior', 'middle', 'senior'];
-// const skills = ['HTML', 'CSS', 'JS', 'SCSS', 'Git', 'React'];
 const defaultStateValues = {
   name: '',
   number: '',
-  // experience: '',
-  // licence: false,
-  // skills: [],
 };
 
 /* ------------------------------------------------------------------------------------------------------------ */
@@ -101,8 +72,8 @@ function isContactDublicate (values, contactEditInfo, contacts, setSubmitting) {
 }
 
 function isDisabledBtn (isSubmitting, formValues) {
-  const { /* experience, licence, skills, */ name, number} = formValues;
-  return isSubmitting || name === '' || number === '' /* || experience === '' || !licence || skills.length === 0 */;
+  const { name, number} = formValues;
+  return isSubmitting || name === '' || number === '';
 }
 /* ------------------------------------------------- */
 ContactFormik.propTypes = {
