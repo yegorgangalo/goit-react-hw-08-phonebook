@@ -10,14 +10,14 @@ function ContactList() {
 
   return (
     <ul>
-      {contacts.map(({ id, name, number, experience, skills }) =>
+      {contacts.map(({ id, name, number, /* experience, skills  */}) =>
         <li className={s.item} key={id}>
           <ContactItem
             id={id}
             name={name}
             number={number}
-            experience={experience}
-            skills={skills}
+            /* experience={experience}
+            skills={skills} */
           />
         </li>
       )}
@@ -31,8 +31,8 @@ ContactList.propTypes = {
           id: PropTypes.string.isRequired,
           name: PropTypes.string.isRequired,
           number: PropTypes.string.isRequired,
-          experience: PropTypes.string.isRequired,
-          skills: PropTypes.arrayOf(PropTypes.string.isRequired),
+          /* experience: PropTypes.string.isRequired,
+          skills: PropTypes.arrayOf(PropTypes.string.isRequired), */
       })),
 }
 

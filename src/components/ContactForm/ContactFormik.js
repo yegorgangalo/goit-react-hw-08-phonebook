@@ -11,7 +11,8 @@ import { getEditItem } from 'redux/contacts/contacts-selectors';
 /* ------------------------------------------------------------------------------------------------------------ */
 function ContactFormik({ toggleModal }) {
   const contactEditInfo = useSelector(getEditItem);
-  const defaultFormikStateValues = contactEditInfo ? { ...contactEditInfo, licence: true } : defaultStateValues;
+  // const defaultFormikStateValues = contactEditInfo ? { ...contactEditInfo, licence: true } : defaultStateValues;
+  const defaultFormikStateValues = contactEditInfo ? contactEditInfo : defaultStateValues;
 
   const dispatch = useDispatch();
   const onAddContact = (value) => dispatch(addContact(value));
@@ -43,7 +44,7 @@ function ContactFormik({ toggleModal }) {
            <label  className={s.title} htmlFor="number">Number </label>
            <Field className={s.labelBlock} type="text" name="number" />
            <ErrorMessage name="number" component="div" />
-           <div  role="group" aria-labelledby="radio-group" className={`${s.labelBlock} ${s.groupBlock}`}>
+           {/* <div  role="group" aria-labelledby="radio-group" className={`${s.labelBlock} ${s.groupBlock}`}>
                 <h3 className={s.title}>Your Level</h3>
                 {expLevel.map(exp =>
                     <label key={exp}>
@@ -64,7 +65,7 @@ function ContactFormik({ toggleModal }) {
             <label className={s.labelBlock}>
                 <Field type="checkbox"  className={s.inputBox} name="licence" id="licence" />
                 All data is right
-            </label>
+            </label> */}
 
             <IconButton
                 type="submit"
@@ -78,14 +79,14 @@ function ContactFormik({ toggleModal }) {
 }
 
 /* ------------------------------------------------------------------------------------------------------------ */
-const expLevel = ['junior', 'middle', 'senior'];
-const skills = ['HTML', 'CSS', 'JS', 'SCSS', 'Git', 'React'];
+// const expLevel = ['junior', 'middle', 'senior'];
+// const skills = ['HTML', 'CSS', 'JS', 'SCSS', 'Git', 'React'];
 const defaultStateValues = {
   name: '',
   number: '',
-  experience: '',
-  licence: false,
-  skills: [],
+  // experience: '',
+  // licence: false,
+  // skills: [],
 };
 
 /* ------------------------------------------------------------------------------------------------------------ */
@@ -100,8 +101,8 @@ function isContactDublicate (values, contactEditInfo, contacts, setSubmitting) {
 }
 
 function isDisabledBtn (isSubmitting, formValues) {
-  const { experience, licence, name, number, skills } = formValues;
-  return isSubmitting || experience === '' || !licence || name === '' || number === '' || skills.length === 0;
+  const { /* experience, licence, skills, */ name, number} = formValues;
+  return isSubmitting || name === '' || number === '' /* || experience === '' || !licence || skills.length === 0 */;
 }
 /* ------------------------------------------------- */
 ContactFormik.propTypes = {
