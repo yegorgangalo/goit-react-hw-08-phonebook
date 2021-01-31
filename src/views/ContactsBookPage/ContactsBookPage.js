@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import Context from 'components/Context';
 import ContactFormik from 'components/ContactForm';
 import Filter from 'components/Filter';
@@ -15,7 +16,7 @@ function ContactsBookPage () {
   const [showModal, setShowModal] = useState(false);
 
   const loading = useSelector(getLoading);
-  const error = useSelector(getError);
+  const contactsError = useSelector(getError);
   const contacts = useSelector(getItems);
   const dispatch = useDispatch();
 
@@ -31,6 +32,8 @@ function ContactsBookPage () {
     toggleModal();
     dispatch(editContact(null));
   }
+
+  const contactsNotify = () => {toast(contactsError)};
 
       return (
         <>
@@ -50,7 +53,7 @@ function ContactsBookPage () {
             <ContactList/>
           </Context.Provider>
           {loading && <h1>is loading...</h1>}
-          {error && <h1>{error}</h1>}
+          {contactsError && contactsNotify()}
         </>
       )
 }

@@ -4,9 +4,6 @@ import authOperations from './auth-operations';
 const { register, logIn, logOut, fetchCurrentUser } = authOperations;
 
 const initialUserState = { name: null, email: null };
-  // token: null,
-  // isLoggedIn: false,
-  // error: null,
 
 /* ---------------USER_REDUCER---------------------- */
 const user = createReducer(initialUserState, {
@@ -21,7 +18,6 @@ const token = createReducer(null, {
   [register.fulfilled]: (_, {payload}) => payload.token,
   [logIn.fulfilled]: (_, {payload}) =>payload.token,
   [logOut.fulfilled]: () => null,
-  // [fetchCurrentUser.fulfilled]: (_, {payload}) =>,
 });
 
 /* ---------------ISLOGGEDIN_REDUCER---------------------- */
@@ -46,9 +42,12 @@ const loading = createReducer(false, reducerLoadingObj);
 const setError = (_, { payload }) => {
     if (payload) {
         const { status, config, request, statusText } = payload;
-        return `Error ${status}. Can't ${config.method} by ${request.responseURL}. ${statusText}`;
+        return `Error ${status}. Can't ${config?.method} by ${request?.responseURL}. ${statusText}`;
     }
-    return 'Error. No connection with Server';
+  if (!payload) {
+    return false;
+  }
+  return 'Error. No connection with Server';
 };
 const resetError = () => null;
 
@@ -58,40 +57,23 @@ const reducerErrorObj = Object.values(authOperations)
     }, {});
 
 const error = createReducer(null, reducerErrorObj);
-/* ---------------------------------------------------- */
 
+/* ---------------REFRESH_REDUCER---------------------- */
+const toggleRefresh = (state) => !state;
+
+const reducerRefreshObj = Object.values(authOperations.fetchCurrentUser)
+  .reduce((accObj, operation) => {
+        return typeof operation==='function' ? ({ ...accObj, [operation]: toggleRefresh}) : accObj;
+  }, {});
+
+const notRefreshed = createReducer(true, reducerRefreshObj);
+
+/* ---------------------------------------------------- */
 export default combineReducers({
   user,
   token,
   isLoggedIn,
   loading,
   error,
+  notRefreshed,
 });
-
-// const authSlice = createSlice({
-//   name: 'auth',
-//   initialState,
-//   extraReducers: {
-//     [authOperations.register.fulfilled](state, action) {
-//       state.user = action.payload.user;
-//       state.token = action.payload.token;
-//       state.isLoggedIn = true;
-//     },
-//     [authOperations.logIn.fulfilled](state, action) {
-//       state.user = action.payload.user;
-//       state.token = action.payload.token;
-//       state.isLoggedIn = true;
-//     },
-//     [authOperations.logOut.fulfilled](state, action) {
-//       state.user = { name: null, email: null };
-//       state.token = null;
-//       state.isLoggedIn = false;
-//     },
-//     [authOperations.fetchCurrentUser.fulfilled](state, action) {
-//       state.user = action.payload;
-//       state.isLoggedIn = true;
-//     },
-//   },
-// });
-
-// export default authSlice.reducer;

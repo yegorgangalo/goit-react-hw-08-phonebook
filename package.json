@@ -32,7 +32,7 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "netlifydeploy": "npm run build && netlify deploy -p",
+    "ndep": "npm run build && netlify deploy -p",
     "server": "json-server --watch db.json --port 3004"
   },
   "eslintConfig": {
